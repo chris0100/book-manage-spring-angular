@@ -1,0 +1,88 @@
+<div class="card border border-dark bg-dark text-white">
+	<div class="card-header">
+		<strong *ngIf="book.id == 0"><i class="fa fa-plus-circle"></i> Add New Book</strong>
+    <strong *ngIf="book.id != 0"><i class="fa fa-pencil-square-o"></i> Update Book</strong>
+	</div>
+	<form class="form-horizontal" #bookForm="ngForm">
+		<div class="card-body">
+			<div class="row">
+				<label class="col-md-2 control-label">Title</label>
+				<div class="col-md-4 mb-3">
+					<input type="text" class="form-control bg-dark text-white" placeholder="Enter Book Title" id="title" name="title" [(ngModel)]="book.title" required minlength="3" #title="ngModel">
+					<p class="text-danger" *ngIf="title.errors?.required && title.touched">
+						Book Title is required.
+					</p>
+					<p class="text-danger" *ngIf="title.errors?.minlength">
+						Book Title must be at least 3 characters long.
+					</p>
+				</div>
+				
+				<label class="col-md-2 control-label">Author</label>
+				<div class="col-md-4 mb-3">
+					<input type="text" class="form-control bg-dark text-white" placeholder="Enter Book Author" id="author" name="author" [(ngModel)]="book.author" required minlength="3" #author="ngModel">
+					<p class="text-danger" *ngIf="author.errors?.required && author.touched">
+						Book Author is required.
+					</p>
+					<p class="text-danger" *ngIf="author.errors?.minlength">
+						Book Author must be at least 3 characters long.
+					</p>
+				</div>
+			</div>
+			<div class="row">
+				<label class="col-md-2 control-label">Cover Photo URL</label>
+				<div class="col-md-4 mb-3">
+					<input type="text" class="form-control bg-dark text-white" placeholder="Enter Book Cover Photo URL" id="coverPhotoURL" name="coverPhotoURL" [(ngModel)]="book.coverPhotoURL" required minlength="10" #coverPhotoURL="ngModel">
+					<p class="text-danger" *ngIf="coverPhotoURL.errors?.required && coverPhotoURL.touched">
+						Book Cover Photo URL is required.
+					</p>
+					<p class="text-danger" *ngIf="coverPhotoURL.errors?.minlength">
+						Book Cover Photo URL must be at least 10 characters long.
+					</p>
+				</div>
+				
+				<label class="col-md-2 control-label">ISBN Number</label>
+				<div class="col-md-4 mb-3">
+					<input type="text" class="form-control bg-dark text-white" placeholder="Enter Book ISBN Number" id="isbnNumber" name="isbnNumber" [(ngModel)]="book.isbnNumber" required minlength="3" #isbnNumber="ngModel">
+					<p class="text-danger" *ngIf="isbnNumber.errors?.required && isbnNumber.touched">
+						Book ISBN Number is required.
+					</p>
+					<p class="text-danger" *ngIf="isbnNumber.errors?.minlength">
+						Book ISBN Number must be at least 3 characters long.
+					</p>
+				</div>
+			</div>
+			<div class="row">
+				<label class="col-md-2 control-label">Price</label>
+				<div class="col-md-4 mb-3">
+					<input type="text" class="form-control bg-dark text-white" placeholder="Enter Book Price" id="price" name="price" [(ngModel)]="book.price" required minlength="1" #price="ngModel">
+					<p class="text-danger" *ngIf="price.errors?.required && price.touched">
+						Book Price is required.
+					</p>
+					<p class="text-danger" *ngIf="price.errors?.minlength">
+						Book Price must be at least 1 digit long.
+					</p>
+				</div>
+				
+				<label class="col-md-2 control-label">Language</label>
+				<div class="col-md-4 mb-3">
+					<input type="text" class="form-control bg-dark text-white" placeholder="Enter Book Language" id="language" name="language" [(ngModel)]="book.language" required minlength="3" #language="ngModel">
+					<p class="text-danger" *ngIf="language.errors?.required && language.touched">
+						Book Language is required.
+					</p>
+					<p class="text-danger" *ngIf="language.errors?.minlength">
+						Book Language must be at least 3 characters long.
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="card-footer text-right">
+			<button type="button" class="btn btn-success btn-sm" (click)="saveBook()" [disabled]="!bookForm.form.valid"><i class="fa fa-floppy-o"></i> {{book.id == 0 ? "Save" : "Update"}}</button>&nbsp;
+			<span *ngIf="book.id == 0">
+        <button type="reset" class="btn btn-info btn-sm"><i class="fa fa-refresh"></i> Reset</button>
+      </span>
+      <span *ngIf="book.id != 0">
+        <a routerLink="/list" class="btn btn-info btn-sm"><i class="fa fa-list"></i> Show List</a>
+      </span>
+		</div>
+	</form>
+</div>
